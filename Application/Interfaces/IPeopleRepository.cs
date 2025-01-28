@@ -5,5 +5,5 @@ namespace Application.Interfaces;
 public interface IPeopleRepository 
 {
     Task<IEnumerable<ReadPersonModel>> GetAllAsync();
-    Task<AddPersonModel> AddAsync(AddPersonModel model);
+    Task<ReadPersonModel> AddAsync(AddPersonModel model);
 }
