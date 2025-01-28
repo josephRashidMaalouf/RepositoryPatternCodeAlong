@@ -1,8 +1,11 @@
 using Application.Interfaces;
 using Application.Models;
 using Application.Services;
+using Infrastructure.sql;
+using Infrastructure.sql.Repository;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Scalar.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
+
 builder.Services.AddScoped<IPeopleService, PeoplePeopleService>();
 
+builder.Services.AddDbContext<AppDbContext>(optionsAction: options => options.UseInMemoryDatabase(databaseName: "InMemoryDb"));
 
 var app = builder.Build();
 
